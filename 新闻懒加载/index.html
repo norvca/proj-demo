@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+	<style type="text/css">
+    html {
+      height: 1200px;
+    }
+		html,body,ul,li,h2,p,img,a {
+			margin: 0;
+			padding: 0;
+		}
+		ul,li {
+			list-style: none;
+		}
+		.layout {
+			width: 800px;
+			margin: 0 auto;
+		}
+		li {
+			margin-top: 20px;
+		}
+		li a {
+			text-decoration: none;
+			color: #999;
+			display: flex;
+			border: 1px solid #ccc;
+		}
+		li a img {
+			margin-right: 10px;
+		}
+		li a h2{
+			color: #555;
+			padding: 5px 0 10px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<ul>
+      <li>
+        <a href="#">
+          <img src="http://ww1.sinaimg.cn/thumbnail/4ca65b1dgy1flbvvx07r7j20m80m8jvz.jpg" alt="dog_pic">
+          <div class="describe">
+            <h2>这是第 1 条狗</h2>
+            <p>狗（拉丁文Canis lupus familiaris）属于脊索动物门、脊椎动物亚门、哺乳纲、真兽亚纲、食肉目、裂脚亚目、犬科动物。</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="http://ww1.sinaimg.cn/thumbnail/4ca65b1dgy1flbvvx07r7j20m80m8jvz.jpg" alt="dog_pic">
+          <div class="describe">
+            <h2>这是第 2 条狗</h2>
+            <p>狗（拉丁文Canis lupus familiaris）属于脊索动物门、脊椎动物亚门、哺乳纲、真兽亚纲、食肉目、裂脚亚目、犬科动物。</p>
+          </div>
+        </a>
+      </li>
+		</ul>
+    <div class="hideMe"></div>
+	</div>
+	<script type="text/javascript">
+    function isVisible($node){
+      var offsetTop = $node.offset().top;
+      var scrollTop = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if( offsetTop < scrollTop + windowHeight + 200 && offsetTop > scrollTop){
+        return true;
+      }else {
+        return false;
+      }
+    }
+
+
+    sendAjax();
+    var clock;
+    $(window).on('scroll',function(){
+      if(clock) {
+        clearTimeout(clock);
+      }
+      if( isVisible( $('.hideMe')) ) {
+        clock = setTimeout(function(){
+          sendAjax();
+        },100);
+      }
+    });
+
+    function sendAjax(){
+      var idx = $('ul li').length + 1;
+      $.get('/getNews',{
+        news: idx
+      })
+      .done(function(ret){
+        var frag = document.createDocumentFragment(); // 创建碎片节点
+        var $frag = $(frag);
+        $.each(ret,function(index,value){
+          $frag.append( appendHTML(value) );
+          // $frag.html( $frag.html() +  appendHTML(value) ) ;
+        });
+
+        $('ul').append($frag);
+      })
+      .fail(function(){
+        alert('系统异常！');
+      });
+    }
+
+    // 组合新闻
+    function appendHTML(picIndex){
+      var html = '';
+      html += '<li><a href="#"><img src="http://ww1.sinaimg.cn/thumbnail/4ca65b1dgy1flbvvx07r7j20m80m8jvz.jpg" alt="dog_pic"><div class="describe">';
+      html += '<h2>这是第 '+ picIndex +' 条狗</h2>';
+      html += '<p>狗（拉丁文Canis lupus familiaris）属于脊索动物门、脊椎动物亚门、哺乳纲、真兽亚纲、食肉目、裂脚亚目、犬科动物。</p></div></a></li>';
+      return html;
+    }
+	</script>
+</body>
+</html>
