@@ -60,26 +60,17 @@
 
 
   <script type="text/javascript">
-    lazyRender();
+    lazyRender(); // 预加载一次，让初始页面有图显示
 
     var clock;
     $(window).on('scroll',function(){
       if(clock){
-        clearTimeout(clock);
+        clearTimeout(clock); // 300ms内多次滚动则取消上一次定时器，防止多次渲染
       }
       clock = setTimeout(function(){
-        lazyRender();
-        console.log('hello');
+        lazyRender(); // 设置定时器，300ms之后渲染一次
       },300);
     });
-
-    // var clock = true;
-    // $(window).on('scroll',function(){
-    //   if( isVisible( $(a) ) && clock){
-    //     console.log( true );
-    //     clock = false;
-    //   }
-    // });
 
     function loadImg($img){
           $img.attr('src',$img.attr('src-data'));
