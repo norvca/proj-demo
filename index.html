@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style type="text/css">
+  ul,li {
+    list-style: none;
+  }
+  .layout {
+    width: 700px;
+    margin: 0 auto;
+  }
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  img {
+      width: 300px;
+      border: 1px solid #ccc;
+  }
+</style>
+<body>
+  <div class="layout">
+    <ul>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+      <li>
+        <a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flrql508ecj308c08c0sh.jpg" src-data="http://ww1.sinaimg.cn/large/4ca65b1dgy1flbw2g739fj20m80m8jvz.jpg" alt=""></a>
+      </li>
+    </ul>
+  </div>
+
+
+  <script type="text/javascript">
+    lazyRender();
+
+    var clock;
+    $(window).on('scroll',function(){
+      if(clock){
+        clearTimeout(clock);
+      }
+      clock = setTimeout(function(){
+        lazyRender();
+        console.log('hello');
+      },300);
+    });
+
+    // var clock = true;
+    // $(window).on('scroll',function(){
+    //   if( isVisible( $(a) ) && clock){
+    //     console.log( true );
+    //     clock = false;
+    //   }
+    // });
+
+    function loadImg($img){
+          $img.attr('src',$img.attr('src-data'));
+    }
+
+    function isVisible($node){
+      var offsetTop = $node.offset().top; // 获取节点与页面顶端距离
+      var scrollTop = $(window).scrollTop(); // 滚动条与页面顶端距离
+      var windowHeight = $(window).height(); // 浏览器视窗高度
+      
+      if( offsetTop > scrollTop  && offsetTop < scrollTop + windowHeight -200){
+        return true;
+      }else {
+        return false;
+      }
+    }
+
+    function lazyRender(){
+      $('li img').each(function(){
+        if( isVisible( $(this) ) ){
+          loadImg($(this));
+        }
+      });
+    }
+  </script>
+</body>
+</html>
