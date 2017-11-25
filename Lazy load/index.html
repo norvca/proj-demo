@@ -89,13 +89,14 @@
 
     function sendAjax(){
       var idx = $('ul li').length + 1;
-      $.get('/getNews',{
+      $.get('http://www.easy-mock.com/mock/5a1784118cc38a13e0841ecb/lazy_load/getNews',{
         news: idx
       })
       .done(function(ret){
         var frag = document.createDocumentFragment(); // 创建碎片节点
         var $frag = $(frag);
-        $.each(ret,function(index,value){
+        var retNews = ret.news;
+        $.each(retNews,function(index,value){
           $frag.append( appendHTML(value) );
           // $frag.html( $frag.html() +  appendHTML(value) ) ;
         });
