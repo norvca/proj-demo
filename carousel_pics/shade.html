@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="任务17" />
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+    html,body,ul,li,a,img {
+      margin: 0;
+      padding: 0;
+    }
+    ul,li {
+      list-style: none;
+    }
+    .wrap {
+      margin: 0 auto;
+      position: relative;
+      width: 500px;
+      overflow: hidden;
+      height: 258px;
+      margin-top: 40px;
+    }
+    .pic {
+      position: absolute;
+      width: 5000px;
+    }
+    .pic li {
+      float: left;
+    }
+    .pic li img{
+      width: 500px;
+    }
+    .btn {
+      top: 50%;
+      margin-top: -20px;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #ccc;
+      line-height: 40px;
+      text-align: center;
+      color: #ccc;
+      font-size: 22px;
+      cursor: pointer;
+      background-color: #aaa;
+      opacity: 0;
+    }
+    .wrap:hover .btn {
+      transition: all .3s ease-out;
+      opacity: .4;
+    }
+    .wrap .btn:hover {
+      opacity: .8;
+    }
+    .btn a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .btn_right {
+      right: 0px;
+    }
+    .slides {
+      font-size: 0;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      bottom: 10px;
+    }
+    .slides li{
+      display: inline-block;
+      width: 20px;
+      height: 8px;
+      border: 1px solid #ccc;
+      margin: 0 3px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .active {
+      background-color: #fff;
+      opacity: .8;
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <div class="wrap">
+    <ul class="pic">
+      <li><a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flt2gl3qvzj31wc0z7gly.jpg" alt=""></a></li>
+      <li><a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flt2gxc953j31wc0z7jrx.jpg" alt=""></a></li>
+      <li><a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flt2gyygv7j31wc0z7750.jpg" alt=""></a></li>
+      <li><a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flt2h02hnij31wc0z7gmj.jpg" alt=""></a></li>
+      <li><a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flt2h0u4hwj31wc0z7dgs.jpg" alt=""></a></li>
+      <li><a href="#"><img src="http://ww1.sinaimg.cn/large/005ObD4Hgy1flt2h1ulh3j31wc0z7t9u.jpg" alt=""></a></li>
+
+    </ul>
+
+    <ul class="slides">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <div class="btn btn_left"><a href="#"><</a></div>
+    <div class="btn btn_right"><a href="#">></a></div>
+  </div>
+</div>
+  
+  <script>
+    var $pic = $('.pic');
+    var picLength = $('.slides li').length;
+    var picWidth = $('.pic img').width();
+    var picIndex = 0;
+
+    // 左滑动
+    $('.btn_left').click(function(){
+      playPre();
+    });
+
+    function playPre(){
+      $pic.stop();
+
+      picIndex--;
+
+
+      if(picIndex < 0){
+        picIndex = 5;
+      }
+
+      show(picIndex);
+    }
+
+    var clock;
+
+    // 右滑动
+    $('.btn_right').click(function(){
+      playNext();
+    });
+
+    function playNext(){
+      $pic.stop();
+
+      picIndex++;
+
+
+      if(picIndex > 5){
+        picIndex = 0;
+      }
+
+      show(picIndex);
+    }
+
+
+
+    // slides
+    function show(picIndex){
+      $('.slides li').eq(picIndex).addClass('active').siblings().removeClass();
+      $('.pic li').eq(picIndex).fadeIn(200).siblings().fadeOut(200);
+    }
+
+    $('.slides li').hover(function(){
+        var picIndex = $(this).index();
+        show(picIndex);
+    });
+  </script>
+</body>
+</html>
