@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<ul class="content"></ul>
+	<div id="load">隐藏元素，用来加载瀑布</div>
+	<script type="text/javascript">
+
+		var curPage = 0;
+		var perPageCount = 10;
+
+		// 核心代码
+		getData(function(newsList){
+			// console.log(newsList);
+			$.each(newsList, function(idx, news){
+				var $node = getNode(news);
+				$node.find('img').load(function(){
+					$('.content').append($node);
+					console.log($node);
+					// waterFall($node);
+				});
+			});
+		});
+
+
+		$(window).scroll(function(){
+			if(isVisible($load)){
+				getData(function(callback){
+					var $node = getNode(newsList);
+					waterFall($node);
+				});
+			}
+		});
+
+		// 获取数据
+		function getData(callback){
+			$.ajax({
+				url: "http://platform.sina.com.cn/slide/album_tech",
+				dataType: 'jsonp',
+				jsonp: 'jsoncallback',
+				data: {
+					app_key: '1271687855',
+					num: perPageCount,
+					page: curPage
+				}
+			}).done(function(ret){
+				if(ret && ret.status && ret.status.code === "0"){
+					callback(ret.data);
+					curPage++;
+				}
+			});
+		}
+
+		// 拼装节点
+		function getNode(item){
+			var html = '';
+			html += '<li class="item">';
+			html += '<a><img src='+ item.img_url +'></a>';
+			html += '</li>';
+			return html;
+		}
+
+		// 瀑布流布局
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+		.content{
+			position: relative;
+
+		}
+
+		.item{
+			position: absolute;
+			width: 200px;
+			margin-right: 10px;
+			margin-top: 10px;
+			transition: all .5s ;
+		}
+
+		.h1{
+			height: 200px;
+			background-color: #f4b300;
+		}
+
+		.h2{
+			height: 300px;
+			background-color: #691BB8;
+		}
+
+		.h3{
+			height: 400px;
+			background-color: #006ac1;
+		}
+
+		</style>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
+
+	</head>
+	<body>
+		<div class="content">
+			<div class="item h1">
+				1
+			</div>
+			<div class="item h3">
+				2
+			</div>
+			<div class="item h2">
+				3
+			</div>
+			<div class="item h1">
+				4
+			</div>
+			<div class="item h1">
+				5
+			</div>
+			<div class="item h3">
+				6
+			</div>
+			<div class="item h3">
+				7
+			</div>
+ 				<div class="item h2">
+				8
+			</div>
+    	<div class="item h1">
+				9
+			</div>
+			<div class="item h3">
+				10
+			</div>
+			<div class="item h3">
+				11
+			</div>
+			<div class="item h3">
+				12
+			</div>
+			<div class="item h2">
+				13
+			</div>
+			<div class="item h2">
+				14
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			// 把瀑布流封装成对象
+			var waterFall = (function(){
+				function waterfall(){
+					// 前期准备
+					var colWidth = $('.item').width();
+					var colLength = parseInt( $('.content').width() / colWidth ); // 列数
+					var itemArr = []; // 利用数组来存放瀑布数和瀑布高度
+					for(i=0; i<colLength; i++){
+						itemArr[i] = 0; // 让每列的初始高度为零
+					}
+
+					// 做瀑布
+					$('.item').each(function(){
+						var minHeight = Math.min.apply(null,itemArr); // 数组里最小高度
+						var minIndex = itemArr.indexOf(minHeight); // 数组里最小高度对应的序号
+
+						$(this).css({
+							top: itemArr[minIndex],
+							left: minIndex * $(this).outerWidth(true)
+						});
+
+						itemArr[minIndex] += $(this).outerHeight(true);
+					});
+				}
+
+				function init(){ // 执行该方法就执行瀑布流
+					waterfall();
+
+					$(window).resize(function(){
+						waterfall();
+					});
+				}
+
+				return { // 返回一个对象
+					init:init // 对象包含一个init方法
+				};
+			})();
+		</script>
+	</body>
+</html>
