@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>懒加载</title>
 	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
 	<style type="text/css">
     html {
@@ -89,7 +89,11 @@
 
     function sendAjax(){
       var idx = $('ul li').length + 1;
+<<<<<<< HEAD
       $.get('https://www.easy-mock.com/mock/5a1784118cc38a13e0841ecb/lazy_load/getNews',{
+=======
+      $.get('//www.easy-mock.com/mock/5a1784118cc38a13e0841ecb/lazy_load/getNews',{
+>>>>>>> 6c8a55bec6fea620951096122f6702bcbd0cfc4a
         news: idx
       })
       .done(function(ret){
@@ -111,7 +115,11 @@
     // 组合新闻
     function appendHTML(picIndex){
       var html = '';
+<<<<<<< HEAD
       html += '<li><a href="#"><img src="https://picsum.photos/120/120/?random" alt="dog_pic"><div class="describe">';
+=======
+      html += '<li><a href="#"><img src="https://ww1.sinaimg.cn/thumbnail/4ca65b1dgy1flbvvx07r7j20m80m8jvz.jpg"><div class="describe">';
+>>>>>>> 6c8a55bec6fea620951096122f6702bcbd0cfc4a
       html += '<h2>这是第 '+ picIndex +' 条狗</h2>';
       html += '<p>狗（拉丁文Canis lupus familiaris）属于脊索动物门、脊椎动物亚门、哺乳纲、真兽亚纲、食肉目、裂脚亚目、犬科动物。</p></div></a></li>';
       return html;
