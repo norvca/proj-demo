@@ -1,0 +1,83 @@
+ * {
+  margin: 0;
+  padding: 0;
+}
+ body,html {
+  height: 100%;
+  overflow-x: hidden;
+ }
+ ul{
+  list-style: none;
+ }
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.ct-box {
+  background-size: cover;
+  background-position:  50% 50%;
+  text-align: center;
+}
+.carousel, .sections, .ct-box{
+  height: 100%;
+}
+
+.sections {
+  background-color: #555;
+  align-items: center;
+  transition: all .3s;
+  /*考虑到滚动条有宽度，所以是1349px*/
+  transform: translateX(-1349px);
+}
+.ct-box {
+  float: left;
+  opacity: .9;
+}
+
+.section0{
+  background-image: url(../pics/1.png);
+}
+.section1 {
+  background-image: url(../pics/2.png);
+}
+.section2 {
+  background-image: url(../pics/3.jpg);
+}
+.section3 {
+  background-image: url(../pics/4.png);
+}
+
+.carousel {
+  width: 600%;
+}
+
+.left {
+  width: calc(100%/6);
+}
+
+h2 {
+  color: #c9f;
+}
+
+.btn {
+  width: 50px;
+  height: 50px;
+  background-color: #aaa;
+  text-align: center;
+  line-height: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 40px;
+  font-size: 30px;
+}
+
+.btn-right {
+  right: 0px;
+}
+
+
+
+
