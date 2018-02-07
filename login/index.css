@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.login-cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(50, 50, 50, .6);
+}
+
+.login-box {
+  text-align: center;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(244, 244, 244);
+  width: 40vw;
+  height: 30vh;
+  border-radius: 7px;
+}
+
+.security-code {
+  margin-top: 10vh;
+  letter-spacing: 1vh;
+  padding: 1vh;
+}
+
+.security-code ul{
+  display: flex;
+  justify-content: center;
+}
+
+.input-code ul {
+  margin-top: 10vh;
+}
+
+.security-code ul li {
+  border: 1px solid #bbb;
+  border-right: 0px;
+  width: 7vh;
+}
+
+.security-code ul li {
+  border: 1px solid #bbb;
+  border-right: 0px;
+  width: 7vh;
+}
+
+.security-code ul li:last-child {
+  border-right: 1px solid #bbb;
+}
+
+.security-code ul input {
+  max-width: 7vh;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-right: 0;
+  font-size: 6vh;
+}
+
+.security-code ul input::placeholder {
+  color: #ccc;
+}
+
+.security-code ul input:last-child {
+  border-right: 1px solid #ccc;
+}
+
+.code-tip {
+  margin-top: 1vh;
+  text-align: center;
+}
+
+span {
+  font-size: 4vh;
+}
+
+.login-box {
+  height: 40vh;
+}
